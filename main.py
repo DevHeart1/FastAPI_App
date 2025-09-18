@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydentic import BaseModel
+from pydantic import BaseModel
 from typing import Optional
 
 app = FastAPI()
@@ -35,5 +35,5 @@ class Blog(BaseModel):
 
 
 @app.post("/blog")
-def create_blog(blog: dict):
+def create_blog(request: Blog):
     return {"data": "blog is created"}
