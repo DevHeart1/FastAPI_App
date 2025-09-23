@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-from . import schema
+from . import schema, models
+from . database import engine
+
 
 app = FastAPI()
 
-class Blog(BaseModel):
-    title: str
-    body: str
+# Create tables if they don't exist yet using the database engine
+models.Base.metadata.create_all(engine)
 
 @app.post("/blog")
 def create(request: schema.Blog):
